@@ -15,11 +15,13 @@ const images = [
     alt: "Group of Horses Running",
   },
 ];
+const cartMarkup = createImageCarts(images);
 const galleryEl = document.querySelector("#gallery");
-const buildGallery = galleryEl.insertAdjacentHTML(
-  "afterbegin",
-  images.reduce((acc, { url, alt }) => {
-    acc += `<li class = gallery-list><img src = ${url} alt = ${alt} class=photo/></li>`;
-    return acc;
-  }, "")
-);
+const buildGallery = galleryEl.insertAdjacentHTML("afterbegin", cartMarkup);
+function createImageCarts(images) {
+  return images
+    .map(({ url, alt }) => {
+      return `<li class = gallery-list><img src = ${url} alt = ${alt} class=photo/></li>`;
+    })
+    .join("");
+}
